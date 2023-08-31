@@ -19,9 +19,13 @@ export const searchMovies = async (page) => {
     store.state.message = "";
   }
   try {
-    const res = await fetch(
-      `https://omdbapi.com?apikey=7035c60c&s=${store.state.searchText}&page=${page}`
-    );
+    const res = await fetch("/api/movie", {
+      method: "POST",
+      body: JSON.stringify({
+        title: store.state.searchText,
+        page,
+      }),
+    });
     const { Search, totalResults, Response, Error } = await res.json(); // json메소드로 서버에서 가져온 정보 분석
     if (Response === "True") {
       store.state.movies = [
@@ -43,10 +47,12 @@ export const searchMovies = async (page) => {
 
 export const getMovieDetails = async (id) => {
   try {
-    const res = await fetch(
-      `https://omdbapi.com?apikey=7035c60c&i=${id}&plot=full`
-    );
-    // omdbapi 사이트에 명시된 Parameter중 i(각 영화별 고유 id)와 plot(영화 줄거리) parameter를 사용하여 해당하는 영화의 상세 줄거리를 출력하도록 함.
+    const res = await fetch("/api/movie", {
+      method: "POST", //method 기본 속성은 "GET"임
+      body: JSON.stringify({
+        id,
+      }),
+    });
     store.state.movie = await res.json();
   } catch (error) {
     console.log("getMovieDetails error:", error);
