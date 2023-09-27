@@ -1,7 +1,14 @@
 import { Component } from "../core/heropy";
+import { SimpleMovie } from "../store/movie";
+
+interface Props {
+  [key: string]: unknown; // 인덱싱 가능한 타입으로 이렇게 설정해줌
+  movie: SimpleMovie;
+}
 
 export default class MovieItem extends Component {
-  constructor(props) {
+  public props!: Props;
+  constructor(props: Props) {
     //MovieItem이 생성자 함수로 호출될 때, props로 부모 컴포넌트->자식 컴포넌트로 정보를 받아올거고 그 정보를 상속하는 Component 클래스로 super 함수를 통해서 props와 tagName을 전달
     super({
       props,
