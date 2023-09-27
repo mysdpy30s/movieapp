@@ -1,6 +1,15 @@
 import { Component } from "../core/heropy";
 
+interface State {
+  [key: string]: unknown;
+  menus: {
+    name: string;
+    href: string;
+  }[];
+}
+
 export default class TheHeader extends Component {
+  public state!: State; // !(할당 단언)을 통해 이미 초기값이 있는것처럼 역할 가능. 이렇게 안쓰고 public state = {} as State 로 하게되면, 최초 1회 렌더링은 잘 되지만, 이후에는 constructor 부분의 함수가 아닌 public state 부분부터 실행이 되게 되고, 그렇게 되면 그냥 {} 이렇게 빈 값만 출력되기 때문임.
   constructor() {
     super({
       tagName: "header",

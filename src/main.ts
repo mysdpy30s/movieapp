@@ -2,7 +2,8 @@ import App from "./App";
 import router from "./routes";
 
 const root = document.querySelector("#root");
-root.append(new App().el); // 이렇게 생성자 함수로 실행해줘야 컴포넌트 내용이 만들어 짐. 그리고 .el을 붙여줌으로써 실제 요소 정보를 갖고 있는 속성 이름을 작성해서 append로 밀어 넣는다.
+root?.append(new App().el); // 이렇게 생성자 함수로 실행해줘야 컴포넌트 내용이 만들어 짐. 그리고 .el을 붙여줌으로써 실제 요소 정보를 갖고 있는 속성 이름을 작성해서 append로 밀어 넣는다.
+// root에 ?(선택적 체이닝)을 붙임으로써, root이 있으면 작동을 하고, 없으면 작동하지 않게 함.
 
 router();
 
